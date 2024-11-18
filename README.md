@@ -1,50 +1,102 @@
-# Welcome to your Expo app 👋
+MEWMEW: Full Stack Social Media Mobile Application Documentation
+MEWMEW is a full-stack social media mobile application developed using React Native for the frontend and Supabase for the backend. The application provides an interactive platform for users to connect, share posts, and manage their social profiles with real-time features.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Features
+User Features
+1.	User Management
+o	Account creation, login, and profile picture update.
+2.	Posts
+o	Users can create, edit, delete, and like posts.
+o	Add comments to posts and view comments from other users.
+3.	Real-Time Chat
+o	One-on-one messaging with other users.
+o	Real-time updates for new messages on the chat screen.
+4.	Notifications
+o	Real-time notifications for likes, comments, and new messages.
+5.	Search
+o	Search post
 
-## Get started
+Admin Panel
+1.	User Management
+o	View, edit, delete user accounts.
+2.	Post Management
+o	View, edit, and delete posts
+3.	Comment Management
+o	View and delete comments.
+Technology Stack
+Frontend Libraries
+•	React Native
+•	Redux Toolkit
+•	Expo Router
+•	Expo Camera
+•	Expo Image Picker
+•	React Native Chart Kit
+•	React Native Paper
+•	React Native Snap Carousel
+Backend Services
+•	Supabase
+•	PostgreSQL
+•	Supabase Authentication
+•	Supabase Realtime
+•	Supabase Storage
 
-1. Install dependencies
+Testing Instructions
+To test the application:
+1.	For Android Users:
+o	Download Expo Go on your Android smartphone.
+o	Scan the provided QR code below within Expo Go.
 
-   ```bash
-   npm install
-   ```
+o	 
 
-2. Start the app
 
-   ```bash
-    npx expo start
-   ```
+2.	For iOS Users:
+o	Download Expo Go on your Apple smartphone.
+o	Scan the provided QR code below within Expo Go.
+ 
+Note: The backend might experience delays due to free-tier hosting limitations. This delay is not a bug but an issue related to hosting.
 
-In the output, you'll find options to open the app in a
+Backend Setup
+Environment Variables
+Ensure the following environment variables are set in the file for the Supabase backend:
+•	SUPABASE_URL
+•	SUPABASE_KEY
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Frontend Setup
+1.	Navigate to the mobile project directory.
+2.	Install dependencies with npm install.
+3.	Start the application with npm expo start.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Supabase Configuration
+Database
+•	Set up tables for users, posts, comments, messages, and notifications in Supabase.
+•	Include proper foreign keys for relational data management.
+Realtime Features
+•	Enable real-time updates for the posts, comments, and messages tables in Supabase.
+Storage
+•	Configure Supabase storage for user profile pictures and post images.
 
-## Get a fresh project
+Starting the Application
+Frontend
+1.	Navigate to the mobile directory.
+2.	Install dependencies using:
+//bash
+//Sao chép mã
+npm install
+3.	Start the app with:
+//bash
+//Sao chép mã
+npm expo start
+Backend
+1.	Configure the Supabase backend through the Supabase dashboard.
+2.	Set up environment variables as mentioned.
 
-When you're ready, run:
+Postman API Documentation
+Use Postman to explore the Supabase API and perform CRUD operations for testing.
+User Manual
+Backend
+1.	Set up the Supabase backend through the Supabase dashboard.
+2.	Ensure all tables, relationships, and realtime subscriptions are properly configured.
+Frontend
+1.	Clone the repository and navigate to the frontend project.
+2.	Run the app locally or on Expo Go using the setup instructions above.
 
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
