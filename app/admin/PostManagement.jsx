@@ -52,15 +52,11 @@ const PostManagement = () => {
     };
 
     // Cập nhật bài đăng
-    const updatePost = async (postId, updatedInfo) => {
-        const { error } = await supabase.from('posts').update(updatedInfo).eq('id', postId);
-        if (error) {
-            console.log(error.message);
-            Alert.alert("Lỗi", "Không thể cập nhật bài đăng.");
-        } else {
-            fetchPosts(); // Tải lại danh sách sau khi cập nhật
-            Alert.alert("Thông báo", "Cập nhật bài đăng thành công");
-        }
+    const updatePost = async (postId, body, file) => {
+        router.push({
+            pathname: '/admin/editPostAdmin',
+            params: { postId, body, file }
+        });
     };
 
    // Xóa bài đăng với xác nhận
@@ -117,7 +113,7 @@ const deletePost = async (postId) => {
                                 <TouchableOpacity onPress={() => deletePost(item.id)} style={styles.deleteButton}>
                                     <Text style={styles.deleteButtonText}>Xóa</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => updatePost(item.id, { body: 'Nội dung cập nhật' })} style={styles.editButton}>
+                                <TouchableOpacity onPress={() => updatePost(item.id, item.body, item.file)} style={styles.editButton}>
                                     <Text style={styles.editButtonText}>Cập nhật</Text>
                                 </TouchableOpacity>
                             </View>

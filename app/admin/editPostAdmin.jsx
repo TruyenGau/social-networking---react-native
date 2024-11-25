@@ -14,66 +14,58 @@ import { updateUser } from '../../services/userService'
 import { router, useRouter } from 'expo-router'
 import * as ImagePicker from 'expo-image-picker'
 
-const EditProfile = () => {
-  const { user: currentUser, setUserData } = useAuth();
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const [user, setUser] = useState({
-    name: '',
-    phoneNumber: '',
-    image: '',
-    bio: '',
-    address: '',
-    email: '',
-
-  });
-  useEffect(() => {
-    if (currentUser) {
-      setUser({
-        name: currentUser.name || '',
-        phoneNumber: currentUser.phoneNumber || '',
-        image: currentUser.image || null,
-        address: currentUser.address || '',
-        bio: currentUser.bio || '',
-        email: currentUser.email || '',
-      });
-    }
-  }, [currentUser])
-  const onPickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 0.7,
+const EditPostAdmin = () => {
+    const { postId, body, file } = useLocalSearchParams();
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
+    const [post, setPost] = useState({
+      body: '',
+      file: '',
+  
     });
-
-    if (!result.canceled) {
-      setUser({ ...user, image: result.assets[0] });
+    useEffect(() => {
+      if (postId) {
+        setPost({
+          body: body || '',
+          file: file || '',
+        });
+      }
+    }, [])
+    const onPickImage = async () => {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 0.7,
+      });
+  
+      if (!result.canceled) {
+        setPost({ ...user, file: result.assets[0] });
+      }
     }
-  }
-
-  const onsubmit = async () => {
-    let userData = { ...user };
-    let { name, phoneNumber, address, image, bio, email } = userData;
-    if (!name || !phoneNumber || !address || !bio || !image || !email) {
-      Alert.alert("Trang cá nhân", "Làm ơn điền đầy đủ thông tin");
-      return;
-    }
-    setLoading(true);
-
-    if (typeof image == 'object') {
-      //upload image
-      let imageRes = await uploadFile('profiles', image?.uri, true);
-      if (imageRes.success) userData.image = imageRes.data;
-      else userData = null;
-    }
-    const res = await updateUser(currentUser?.id, userData);
-    setLoading(false);
-
-    if (res.success) {
-      setUserData({ ...currentUser, ...userData });
-      router.back();
-    }
+  
+    const onsubmit = async () => {
+      let postData = { ...post };
+      let {  body, file } = postData;
+      if (!body) {
+        Alert.alert("Chỉnh sửa bài viết", "Làm ơn điền đủ thông tin");
+        return;
+      }
+      setLoading(true);
+  
+      if (typeof file == 'object') {
+        //upload image
+        let file = await uploadFile('postImages', file?.uri, true);
+        if (file.success) postData.file = file.data;
+        else postData = null;
+      }
+      const res = await updateUser(userId, userData);
+      setLoading(false);
+  
+      if (res.success) {
+      //   setUserData({ ...currentUser, ...userData });
+        router.back();
+      }
   }
 
   let imageSource = user.image && typeof user.image == 'object' ? user.image.uri : GetUserImageSrc(user.image)
@@ -138,7 +130,7 @@ const EditProfile = () => {
   )
 }
 
-export default EditProfile
+export default EditPostAdmin
 
 const styles = StyleSheet.create({
   container: {

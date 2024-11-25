@@ -314,3 +314,25 @@ export const sendImage = async (senderId, receiverId, content, file) => {
         return { success: false, msg: 'Could not create your sendImage' };
     }
 }
+
+
+
+export const fetchAllUsersnoAdmin = async (currentUserId) => {
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .select('id, name, image, bio, email, address, phoneNumber')
+            .neq('id', currentUserId)
+            .neq('name', 'admin');
+
+        if (error) {
+            console.log('fetchUsersExcludingCurrent error: ', error);
+            return { success: false, msg: 'Could not fetch users' };
+        }
+
+        return { success: true, data: data };
+    } catch (error) {
+        console.log('fetchUsersExcludingCurrent error: ', error);
+        return { success: false, msg: 'Could not fetch users' };
+    }
+}

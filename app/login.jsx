@@ -70,7 +70,7 @@ const Login = () => {
           <Text style={styles.forgotPassword}>
             Quên mật khẩu?
           </Text>
-          <Button title={'Login'} loading = {loading} onPress = {onSubmit}/>
+          <Button title={'Đăng Nhập'} loading = {loading} onPress = {onSubmit}/>
         </View>
 
         {/* footer */}

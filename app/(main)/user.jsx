@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { fetchAllUsers } from '../../services/postService';
+import { fetchAllUsers, fetchAllUsersnoAdmin } from '../../services/postService';
 import { FlatList } from 'react-native';
 import { useAuth } from '../../contexts/AuthContext';
 import ScreenWrapper from '../../components/ScreenWrapper';
@@ -15,13 +15,13 @@ const User = () => {
     const { user } = useAuth();
     const [allUser, setAllUser] = useState(null);
     const router = useRouter();
-    
+    const [notificationCount, setNotificationCount] = useState(0);
     useEffect(() => {
         getAllUser();
     }, []);
 
     const getAllUser = async () => {
-        let res = await fetchAllUsers(user.id);
+        let res = await fetchAllUsersnoAdmin(user.id);
         if (res.success) {
             setAllUser(res.data);
         }

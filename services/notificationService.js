@@ -49,3 +49,26 @@ export const fetchNotifications = async (receiverId) => {
         return { success: false, msg: 'Could not fetch the notifications' };
     }
 } 
+
+export const createNotificationMess = async (notification) => {
+    try {
+
+        const { data, error } = await supabase
+            .from('notification_mes')
+            .insert(notification)
+            .select()
+            .single();
+
+        if (error) {
+            console.log('Notification error: ', error);
+            return { success: false, msg: 'Something went wrong' };
+        }
+
+        return { success: true, data: data };
+
+    }
+    catch (error) {
+        console.log('Notification error: ', error);
+        return { success: false, msg: 'Something went wrong' };
+    }
+}

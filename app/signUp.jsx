@@ -14,17 +14,27 @@ const SignUp = () => {
   const router = useRouter();
   const emailRef = useRef("");
   const passwordRef = useRef("");
+  const confirmPasswordRef = useRef(""); // Thêm xác nhận mật khẩu
   const nameRef = useRef("");
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async () => {
-    if (!emailRef.current || !passwordRef.current) {
+    if (!emailRef.current || !passwordRef.current || !confirmPasswordRef.current) {
       Alert.alert('Đăng Ký', 'Làm ơn điền đầy đủ thông tin!');
       return;
     }
+
     let name = nameRef.current.trim();
     let email = emailRef.current.trim();
     let password = passwordRef.current.trim();
+    let confirmPassword = confirmPasswordRef.current.trim();
+
+    // Kiểm tra mật khẩu và mật khẩu xác nhận
+    if (password !== confirmPassword) {
+      Alert.alert('Đăng Ký', 'Mật khẩu không khớp. Vui lòng nhập lại!');
+      return;
+    }
+
     setLoading(true);
 
     const { data: { session }, error } = await supabase.auth.signUp({
@@ -37,10 +47,13 @@ const SignUp = () => {
       }
     });
     setLoading(false);
+
     console.log('session', session);
     console.log('error', error);
     if (error) {
       Alert.alert('Đăng Ký', error.message);
+    } else {
+      Alert.alert('Đăng Ký', 'Tạo tài khoản thành công!');
     }
   }
 
@@ -74,6 +87,13 @@ const SignUp = () => {
             placeholder="Nhập Mật Khẩu"
             secureTextEntry
             onChangeText={value => passwordRef.current = value}
+          />
+          {/* Thêm input để nhập lại mật khẩu */}
+          <Input
+            icon={<Icon name="lock" size={26} strokeWidth={1.6} />}
+            placeholder="Xác Nhận Mật Khẩu"
+            secureTextEntry
+            onChangeText={value => confirmPasswordRef.current = value}
           />
 
           <Button title={'Đăng Ký'} loading={loading} onPress={onSubmit} />

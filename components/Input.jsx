@@ -16,7 +16,6 @@ const Input = (props) => {
                 {...props}
             />
         </View>
-
     )
 }
 

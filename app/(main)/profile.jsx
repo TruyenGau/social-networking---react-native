@@ -79,15 +79,15 @@ const Profile = () => {
                     getPosts();
                 }}
                 onEndReachedThreshold={0}
-                ListFooterComponent={hasMore ? (
-                    <View style={{ marginVertical: posts.length == 0 ? 200 : 30 }}>
-                        <Loading />
-                    </View>
-                ) : (
-                    <View style={{ marginVertical: 30 }}>
-                        <Text style={styles.noPosts}>Không có bài viết nào</Text>
-                    </View>
-                )}
+                // ListFooterComponent={hasMore ? (
+                //     <View style={{ marginVertical: posts.length == 0 ? 200 : 30 }}>
+                //         <Loading />
+                //     </View>
+                // ) : (
+                //     <View style={{ marginVertical: 30 }}>
+                //         <Text style={styles.noPosts}>Không có bài viết nào</Text>
+                //     </View>
+                // )}
 
             />
 

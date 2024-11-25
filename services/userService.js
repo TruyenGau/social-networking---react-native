@@ -33,3 +33,4 @@ export const updateUser = async (userId, data) => {
         return { success: false, msg: error.message };
     }
 }
+

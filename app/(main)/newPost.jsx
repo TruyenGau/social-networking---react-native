@@ -88,7 +88,7 @@ const NewPost = () => {
   
   const onSubmit = async () => {
     if(!bodyRef.current && !file){
-      Alert.alert('Post', 'please choose an image or add post body');
+      Alert.alert('Post', 'Làm ơn chọn ảnh và viết nội dung bài viết');
       return;
     }
     let data ={

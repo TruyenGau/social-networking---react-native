@@ -49,6 +49,7 @@ const deleteUser = async (userId) => {
             {
                 text: "Xóa",
                 onPress: async () => {
+                    const {errorPost} = await supabase.from('posts').delete().eq('userId', userId);
                     const { error } = await supabase.from('users').delete().eq('id', userId);
                     if (error) {
                         console.log(error.message);
